@@ -2,10 +2,8 @@ import pandas as pd
 import streamlit as st
 import io
 from datetime import datetime
-from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 from openpyxl.utils import get_column_letter
-from openpyxl.writer.excel import save_virtual_workbook
 
 def day_fraction(date):
     if pd.isnull(date):
@@ -106,14 +104,14 @@ def process_excel(file):
 
 # ---------------- Streamlit UI ----------------
 st.title("📊 Excel Gantt Chart Generator")
-st.write("Upload an Excel file with Planned/Actual Start and End dates to visualize Gantt charts.")
+st.write("Upload an Excel file with Planned/Actual Start and End dates to generate a Gantt chart.")
 
 uploaded_file = st.file_uploader("Upload Excel File", type=["xlsx"])
 
 if uploaded_file:
     with st.spinner("Processing..."):
         result_file = process_excel(uploaded_file)
-        st.success("✅ Gantt chart Excel generated!")
+        st.success("✅ Gantt chart Excel generated successfully!")
         st.download_button(
             label="📥 Download Gantt Excel",
             data=result_file,
